@@ -1,1 +1,381 @@
-# ositosmagicwoo
+<!doctype html>
+<html lang="es">
+<head>
+  <!-- Ajuste para móviles -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+/* Contenedor principal adaptable */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Combos y galería adaptables */
+.combos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.combo img, .gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* muestra la imagen completa */
+  border-radius: 10px;
+}
+
+/* Inputs y botones ocupan todo el ancho */
+.input, textarea, .send, .reserve {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width:880px) {
+  header nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .combos {
+    grid-template-columns: 1fr; /* un combo por fila */
+  }
+  .gallery {
+    grid-template-columns: 1fr 1fr; /* dos imágenes por fila */
+  }
+}
+</style>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSITOS MAGIC WOW — Detalles & Shows</title>
+<meta name="description" content="OSITOS MAGIC WOW — Shows y combos sorpresa en El Alto. Reserva a través de WhatsApp. Mia, Teddy y Panzito te esperan!">
+<style>
+:root{
+  --rose:#ffd6e8;
+  --white:#ffffff;
+  --gold:#d6b76d;
+  --pink-deep:#ff9ccf;
+  --text:#4b3a42;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:linear-gradient(180deg,var(--rose),#fff);color:var(--text);overflow-x:hidden;position:relative;}
+a{color:inherit;text-decoration:none;}
+
+header{position:sticky;top:0;background:rgba(255,255,255,0.8);backdrop-filter:blur(6px);padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
+.container{max-width:1100px;margin:0 auto;padding:0 18px;}
+nav{display:flex;justify-content:space-between;align-items:center;}
+.brand{display:flex;align-items:center;gap:12px;}
+.logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--pink-deep),var(--gold));display:flex;justify-content:center;align-items:center;color:white;font-weight:700;}
+.nav-links{display:flex;gap:14px;align-items:center;}
+.nav-links a{padding:8px 12px;border-radius:10px;cursor:pointer;transition:0.3s;background:transparent;}
+.nav-links a:hover{background:var(--pink-deep);color:white;}
+.cta{background:var(--gold);padding:8px 12px;border-radius:10px;font-weight:600;}
+
+section{padding:28px 0; display:none; opacity:0; transform:translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; position:relative;}
+section.active{display:block; opacity:1; transform:translateY(0);}
+section::before{content:'🐻';position:absolute;top:-20px;left:-20px;font-size:36px;opacity:0.2;}
+
+h2,h3{margin-bottom:12px;}
+.combos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+.combo{background:var(--white);padding:16px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.05); transition:transform 0.3s, box-shadow 0.3s, opacity 0.5s; opacity:0; transform:translateY(20px); position:relative;}
+.combo.show{opacity:1; transform:translateY(0);}
+.combo:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,0.12);}
+.combo::after{content:'🧸';position:absolute;top:10px;right:10px;font-size:28px;opacity:0.4; animation: float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.combo h4{margin-bottom:6px;}
+.price{font-weight:700;color:var(--pink-deep);font-size:20px;}
+.combo ul{margin:10px 0;padding-left:18px;}
+.reserve{display:inline-block;margin-top:10px;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,var(--pink-deep),var(--rose));color:white;font-weight:700;cursor:pointer;border:none;transition:0.3s;}
+.reserve:hover{transform:scale(1.05);}
+
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.gallery img{width:100%;height:120px;object-fit:cover;border-radius:10px;transition:transform 0.3s, box-shadow 0.3s, opacity 0.5s;opacity:0; transform:translateY(20px);}
+.gallery img.show{opacity:1; transform:translateY(0);}
+.gallery img:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,0.15);}
+
+.contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;}
+.input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);margin-top:8px;}
+.send{background:var(--gold);padding:10px 12px;border-radius:10px;font-weight:700;border:none;cursor:pointer;transition:0.3s;}
+.send:hover{background:var(--pink-deep);color:white;}
+
+footer{padding:18px 0;text-align:center;font-size:14px;color:#6b5560;}
+
+@media(max-width:880px){.contact-grid{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
+.floating-bear{position:absolute;font-size:32px;opacity:0.2; animation: floatY 5s ease-in-out infinite;}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+          <nav>
+            <div class="brand" style="display:flex; align-items:center; gap:12px;">
+              <!-- Logo como imagen -->
+              <div class="logo" style="width:56px; height:56px; border-radius:14px; overflow:hidden;">
+                <img src="IMAGEN/LOGO.png" alt="OSITOS MAGIC WOW" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div>
+                <h1>OSITOS MAGIC WOW</h1>
+                <div style="font-size:12px;color:#7e606f">Detalles y Sorpresas • El Alto, Bolivia</div>
+              </div>
+      
+
+
+            <!-- Menú de navegación -->
+            <div class="nav-links">
+              <a id="navInicio" onclick="showSection('inicio')">Inicio</a>
+              <a id="navCombos" onclick="showSection('combos')">Combos</a>
+              <a id="navGaleria" onclick="showSection('galeria')">Galería</a>
+              <a id="navContacto" class="cta" onclick="showSection('contacto')">Contacto</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+      
+
+<!-- Ositos flotantes -->
+<div class="floating-bear" style="top:20%;left:5%">🐻</div>
+<div class="floating-bear" style="top:40%;left:90%;animation-delay:1s">🧸</div>
+<div class="floating-bear" style="top:70%;left:20%;animation-delay:2s">🐻</div>
+<div class="floating-bear" style="top:10%;left:50%;animation-delay:3s">🧸</div>
+
+<main class="container">
+    <section id="inicio" class="active">
+      <div style="border: 3px solid #ff6699; border-radius: 15px; background-color: #fff0f5; padding: 20px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 500px; margin: auto;">
+  
+        <p style="font-weight:600; color:#ff3333; font-size: 18px; margin-bottom: 15px;">
+          🧸🐹 ¡Hey, amig@! 🎉<br>
+          ¿Ya sigues a nuestros ositos y al cuy más divertido en TikTok? 👀<br>
+          Prepárate para disfrutar <strong>promociones de locura</strong>, risas y momentos únicos 💫<br>
+          🎁 ¡Síguenos y vive la magia de nuestros shows! 💖
+        </p>
+        
+        <a href="https://www.tiktok.com/@magic.wow.sorpres" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; background-color:#ff0066; color:white; padding:10px 20px; border-radius:10px; font-weight:bold; font-size:16px;">
+          <img src="IMAGEN/tik.png" alt="TikTok" style="width:24px; height:24px; margin-right:10px;">
+          @magic.wow.sorpres
+        </a>
+        
+      </div>
+      
+      
+      
+        <h2>BIENVENIDOS A OSITOS MAGIC WOW!</h2>
+        <p>🎉 Mia, Teddy y Panzito 🐻 traen diversión, shows mágicos y sorpresas para tu cumpleaños o cualquier tipo evento en LA CIUDAD DE EL ALTO  -  BOLIVIA. 🎶✨  
+           Disfruta de combos especiales y 📷 momentos inolvidables. 💌 ¡Reserva tu show y diviértete con nosotros!</p>
+        <p style="font-weight:700; color:#ff4da6; margin-top:10px;">
+          Contamos combos desde los 100 Bs 🎈
+        </p>
+        <p style="font-weight:600; color:#ff3333; margin-top:5px;">
+            🚗 Nota: El transporte no está incluido en ningun combo, pero nuestros shows llegan con toda la alegría hasta tu celebración.
+          </p>
+      </section>
+
+
+<!-- Combos -->
+<section id="combos">
+    <h2>Combos y Shows</h2>
+    <div class="combos">
+      <!-- Combo 100 Bs -->
+      <div class="combo">
+        <img src="IMAGEN/100.png" alt="Combo 100 Bs" style="width:100%; border-radius:10px; margin-bottom:8px;">
+        <h4>Combo 100 Bs</h4>
+        <div class="price">100 Bs</div>
+        <ul>
+          <li>Corona para el afortunado/a ✨</li>
+          <li>Globo según la ocasión 🎈</li>
+          <li>4 canciones, 2 a elección 🎶</li>
+          <li>Show de 1 osito + animador y baile 🐻💃</li>
+        </ul>
+        <button class="reserve" onclick="reserveCombo('Combo 100 Bs')">Reservar</button>
+      </div>
+  
+      <!-- Combo 150 Bs -->
+      <div class="combo">
+        <img src="IMAGEN/osito1.png" alt="Combo 150 Bs" style="width:100%; border-radius:10px; margin-bottom:8px;">
+        <h4>Combo 150 Bs</h4>
+        <div class="price">150 Bs</div>
+        <ul>
+          <li>Corona para el afortunado/a ✨</li>
+          <li>Globo según la ocasión 🎈</li>
+          <li>5 canciones, 2 a elección 🎶</li>
+          <li>Banner personalizado 50x70 (Reservas 24h antes)</li>
+          <li>Show de 1 osito + animador y baile 🐻💃</li>
+        </ul>
+        <button class="reserve" onclick="reserveCombo('Combo 150 Bs')">Reservar</button>
+      </div>
+  
+      <!-- Combo Premium 190 Bs -->
+      <div class="combo">
+        <img src="IMAGEN/osa y oso solo.png" alt="Combo Premium 190 Bs" style="width:100%; border-radius:10px; margin-bottom:8px;">
+        <h4>Combo Premium 190 Bs</h4>
+        <div class="price">190 Bs</div>
+        <ul>
+          <li>DOS OSITOS Mia y Teddy 🐻🧸</li>
+          <li>Corona para el afortunado/a ✨</li>
+          <li>Globo según la ocasión 🎈</li>
+          <li>5 canciones, 2 a elección 🎶</li>
+          <li>Show de 2 ositos + animador y baile 🐻💃</li>
+          <li>Ramo de flores naturales 💐</li>
+        </ul>
+        <button class="reserve" onclick="reserveCombo('Combo Premium 190 Bs')">Reservar</button>
+      </div>
+  
+      <!-- Show de Panzito el Cuy Gordito -->
+      <div class="combo">
+        <img src="IMAGEN/cuysolo.png" alt="Show de Panzito" style="width:100%; border-radius:10px; margin-bottom:8px;">
+        <h4>Show de Panzito el Cuy Gordito</h4>
+        <div class="price">150 Bs</div>
+        <ul>
+          <li>Corona para el afortunado/a ✨</li>
+          <li>Globo según la ocasión 🎈</li>
+          <li>5 canciones, 2 a elección 🎶</li>
+          <li>Show de Panzito + animador y baile 💃</li>
+        </ul>
+        <button class="reserve" onclick="reserveCombo('Show de Panzito')">Reservar</button>
+      </div>
+  
+      <!-- Banner Personalizado 50x70 -->
+      <div class="combo">
+        <img src="IMAGEN/banner.png" alt="Banner Personalizado 50x70" style="width:100%; border-radius:10px; margin-bottom:8px;">
+        <h4>Banner Personalizado 50x70</h4>
+        <div class="price">40 Bs</div>
+        <ul>
+          <li>Banner diseñado al gusto del cliente </li>
+          <li>Reservas 24 horas antes ✨</li>
+        </ul>
+        <button class="reserve" onclick="reserveCombo('Banner Personalizado 50x70')">Reservar</button>
+      </div>
+    </div>
+  </section>
+  
+  
+
+<!-- Galería -->
+<section id="galeria">
+  <h2>Galería</h2>
+  <div class="gallery">
+    <img src="IMAGEN/osa gente.png" alt="Ositos Magic Wow 1" onclick="reserveCombo('Imagen 1')">
+    <img src="IMAGEN/osayoso.png" alt="Ositos Magic Wow 2" onclick="reserveCombo('Imagen 2')">
+    <img src="IMAGEN/cuyoso.png" alt="Ositos Magic Wow 3" onclick="reserveCombo('Imagen 3')">
+    <img src="IMAGEN/osa.png" alt="Ositos Magic Wow 4" onclick="reserveCombo('Imagen 4')">
+    <img src="IMAGEN/oso tomando .png" alt="Ositos Magic Wow 5" onclick="reserveCombo('Imagen 5')">
+    <img src="IMAGEN/cuy.png" alt="Ositos Magic Wow 6" onclick="reserveCombo('Imagen 6')">
+  </div>
+</section>
+
+<style>
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto; /* altura automática según proporción */
+  max-height: 200px; /* evita que se haga demasiado grande */
+  object-fit: contain; /* muestra la imagen completa sin cortar */
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Clase que se añade al hacer visible la galería */
+.gallery img.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+// Animación de aparición al mostrar la sección
+function showGalleryImages() {
+  const images = document.querySelectorAll('#galeria .gallery img');
+  images.forEach((img, index) => {
+    setTimeout(() => {
+      img.classList.add('show');
+    }, index * 150); // efecto en cascada
+  });
+}
+
+// Mostrar la sección y animar las imágenes
+function showSection(id){
+  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+  setTimeout(() => {
+    const sec = document.getElementById(id);
+    sec.classList.add('active');
+    if(id === 'galeria') showGalleryImages(); // animar galería
+  }, 50);
+}
+</script>
+
+
+<!-- Contacto -->
+<section id="contacto">
+<h2>Contacto</h2>
+<div class="contact-grid">
+<div>
+<textarea placeholder="Mensaje" id="message" rows="4"></textarea>
+<button class="send" onclick="sendForm()">Enviar WhatsApp</button>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container">© <strong>OSITOS MAGIC WOW</strong> — Detalles y Sorpresas • El Alto. Reserva: +591 62114044</div>
+</footer>
+
+<script>
+const WA_NUMBER = '59162114044';
+
+function showSection(id){
+  document.querySelectorAll('main section').forEach(sec => {
+    sec.classList.remove('active');
+    sec.querySelectorAll('.combo').forEach(c => c.classList.remove('show'));
+    sec.querySelectorAll('.gallery img').forEach(img => img.classList.remove('show'));
+  });
+  const section = document.getElementById(id);
+  section.classList.add('active');
+
+  // Animar combos
+  section.querySelectorAll('.combo').forEach((c,i)=>{
+    setTimeout(()=>c.classList.add('show'), i*150);
+  });
+  // Animar imágenes
+  section.querySelectorAll('.gallery img').forEach((img,i)=>{
+    setTimeout(()=>img.classList.add('show'), i*150);
+  });
+}
+
+function reserveCombo(comboName){
+  const text = encodeURIComponent(`Hola, quiero reservar el *${comboName}* de OSITOS MAGIC WOW.\n\nTipo de evento: \nFecha del evento: \nLugar (Ubicacion por maps): \nHora aproximada: \nGracias por la confianza!`);
+  window.open(`https://wa.me/${WA_NUMBER}?text=${text}`,'_blank');
+}
+
+function sendForm(){
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const message = document.getElementById('message').value.trim();
+  if(!message && !name){ alert('Escribe tu nombre o mensaje.'); return;}
+  const text = encodeURIComponent(`Formulario de contacto:\nNombre: ${name}\nTeléfono: ${phone}\nMensaje: ${message}`);
+  window.open(`https://wa.me/${WA_NUMBER}?text=${text}`,'_blank');
+}
+</script>
+</body>
+</html>
+
+
